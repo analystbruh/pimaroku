@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+{% block title %} Predicting Diabetes {% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h1>Pima People Diabetes Predictor</h1>
+    </div>
+</div>
+<div class="container">
+    {% if predicted %}
+        <div class="alert alert-success col-md-4" role="alert">{{ prediction }}: {{ message }}</div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <br>
+    {% else %}
+        <div class="alert alert-info col-md-4" role="alert">{{ message }}</div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <br>
+    {% endif %}
+</div>
+<div class="container">
+    <br><br>
+    <form>
+        <div class="form-group">
+            {% for label, min, max in labels %}
+            <label>{{ label }} - Enter values between {{ min }} and {{ max }}</label>
+            <input type="number" class="form-control" name="{{ label }}" min="{{ min }}" max="{{ max }}" required />
+            <br>
+            {% endfor %}
+            <br>
+            <div class="btn-group btn-group-lg">
+                <input type="submit" class="btn btn-success" value="Predict!" />
+                <input type="reset" class="btn btn-info" />
+            </div>
+        </div>
+    </form>
+    <br>
+    <br>
+        <div class="btn-group btn-group-lg btn-group-vertical" role="group">
+        <a href="https://github.com/analystbruh/pimapeople/blob/master/diabetes.ipynb" class="btn btn-primary">SVC model on Github</a>
+        <a href="https://github.com/analystbruh/pimapeopleapp" class="btn btn-primary">This app code on Github</a>
+        <a href="https://www.kaggle.com/uciml/pima-indians-diabetes-database" class="btn btn-primary">Dataset on Kaggle</a>
+    </div>
+    <br>
+    <br>
+</div>
+{% endblock %}
